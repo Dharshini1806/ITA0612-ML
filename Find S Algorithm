@@ -1,0 +1,27 @@
+from tabulate import tabulate 
+ def train_find_s(examples): 
+    # Initialize hypothesis to the most specific 
+    hypothesis = examples[0][:-1]  # Exclude the target attribute (last column)      for example in examples: 
+        if example[-1] == "Yes":  # Only consider positive examples             for i in range(len(hypothesis)):                 if hypothesis[i] != example[i]: 
+                    hypothesis[i] = "?"  # Generalize if values differ 
+ 
+    return hypothesis 
+ 
+# Sample training data training_data = [ 
+    ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same', 'Yes'], 
+    ['Sunny', 'Warm', 'High', 'Strong', 'Warm', 'Same', 'Yes'], 
+    ['Rainy', 'Cold', 'High', 'Strong', 'Warm', 'Change', 'No'],     ['Sunny', 'Warm', 'High', 'Strong', 'Cool', 'Change', 'Yes'] 
+] 
+ 
+# Column headers 
+headers = ['Sky', 'AirTemp', 'Humidity', 'Wind', 'Water', 'Forecast', 
+'EnjoySport'] 
+  
+# Print training data in tabular form print("Training Data:\n") 
+print(tabulate(training_data, headers=headers, tablefmt="grid")) 
+ 
+# Train the algorithm 
+final_hypothesis = train_find_s(training_data) 
+ 
+# Output the final hypothesis 
+print("\nThe most specific hypothesis is:", final_hypothesis) 
