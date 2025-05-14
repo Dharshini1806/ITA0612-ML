@@ -1,0 +1,25 @@
+from sklearn.preprocessing import StandardScaler from sklearn.neural_network import MLPClassifier 
+from sklearn.metrics import classification_report, accuracy_score 
+ 
+# Load dataset iris = load_iris() 
+X, y = iris.data, iris.target 
+ 
+# Split into train/test sets 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42) 
+ 
+# Standardize features scaler = StandardScaler() 
+X_train = scaler.fit_transform(X_train) 
+X_test = scaler.transform(X_test) 
+ 
+# Create ANN with 1 hidden layer (10 neurons), using backpropagation mlp = MLPClassifier(hidden_layer_sizes=(10,), activation='relu', solver='adam', max_iter=1000, random_state=1) 
+ 
+# Train model 
+mlp.fit(X_train, y_train) 
+ # Predict 
+y_pred = mlp.predict(X_test) 
+ 
+# Evaluation 
+print("Accuracy:", accuracy_score(y_test, y_pred)) 
+print("\nClassification Report:\n", classification_report(y_test, y_pred, target_names=iris.target_names)) 
+from sklearn.preprocessing import StandardScaler from sklearn.neighbors import KNeighborsClassifier 
+from sklearn.metrics import classification_report, accuracy_score 
